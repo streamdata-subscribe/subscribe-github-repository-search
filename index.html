@@ -154,11 +154,12 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   			github_repo_name = Cookies.get('github_repo_name');
 
         console.log("right before!");
-        results_object = JSON.parse(data);
+        //results_object = JSON.parse(data);
+        console.log("total_count: " + data.total_count);
 
-  			results = results_object.items;
+  			results = data.items;
 
-        console.log("count: " + results_object.items);
+        console.log("items: " + results);
 
   			json_dump = unescape(encodeURIComponent(JSON.stringify(results)));
 
