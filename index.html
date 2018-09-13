@@ -285,16 +285,8 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
 
   		userAgent = 'GitHub Topic Subscribe/0.1 by Streamdata.io';
 
-  		if(gitHub_access_token!='')
-  			{
-  			var headers = ['Authorization: token ' + gitHub_access_token,'User-Agent: ' + userAgent];
-  			}
-  		else
-  			{
-  			var headers = ['User-Agent: ' + userAgent];
-  			}
+      var headers = ['Authorization: token ' + gitHub_access_token,'User-Agent: ' + userAgent];
 
-      // create the StreamdataEventSource Object
       eventSource = streamdataio.createEventSource(url, token, headers);
 
       eventSource
