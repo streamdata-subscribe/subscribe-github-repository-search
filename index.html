@@ -39,21 +39,6 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   		gitHub_access_token = Cookies.get('gitHub_access_token');
   		}
 
-  	//console.log("gitHub_access_token: " + gitHub_access_token);
-  	if(gitHub_access_token)
-  		{
-  			table = document.getElementById('master-table');
-  			var tr = document.createElement("tr");
-  			var td = document.createElement("td");
-  			var strong = document.createElement("strong");
-  			var text = document.createTextNode('You Are Authenticated With GitHub!');
-  			strong.appendChild(text);
-  			td.appendChild(strong);
-  			td.setAttribute("align","center");
-  			tr.appendChild(td);
-  			table.appendChild(tr);
-  		}
-
   	var github_access_token = getUrlVar('github_access_token');
   	var github_user_name = getUrlVar('github_user_name');
   	var github_user_name_array = github_user_name.split("?");
