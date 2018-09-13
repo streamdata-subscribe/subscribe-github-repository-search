@@ -17,8 +17,8 @@ consumes:
 paths:
   /search/repositories:
     get:
-      summary: Search Repositories
-      description: Searches across repositories.
+      summary: Search for Istio
+      description: Searches for Istio across repositories.
       operationId: searchRepositories
       x-api-path-slug: searchrepositories-get
       parameters:
