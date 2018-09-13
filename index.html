@@ -338,7 +338,7 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   	//openapi
   	//openapi = 'http://subscribe.streamdata.gallery/subscribe/gitHub/search-istio-get/';
 
-  	pull = base + '?openapi_url=' + openapi + '&id=' + id + '&org={{ github_org }}&repo={{ github_repo }}';
+  	pull = base + '?openapi_url=' + openapi + '&id=' + id + '&org={{ site.github_org }}&repo={{ site.github_repo }}';
     //console.log(pull);
   	var response = $.ajax({
   	       url: pull,
