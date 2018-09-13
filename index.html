@@ -180,13 +180,13 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   			item_count = 0;
   			results.forEach(function(entry) {
 
-  				//console.log(entry);
+  				console.log(entry);
 
   				var tr = document.createElement("tr");
   				var td = document.createElement("td");
-  				var text = document.createTextNode(entry.data.title + ' (score: ' + entry.data.score + ')');
+  				var text = document.createTextNode(entry.full_name + ' (score: ' + entry.stargazers_count + ')');
   				a = document.createElement("a");
-  				a.setAttribute("href",entry.data.url);
+  				a.setAttribute("href",entry.html_url);
   				a.setAttribute("style",'color:#000; text-decoration: none;');
   				a.appendChild(text);
   				td.appendChild(a);
