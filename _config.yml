@@ -1,6 +1,6 @@
 title: Streamdata Subscribe - GitHub
-url: subscribe.github.streamdata.io
-tag: Subscribe Reddit
+url: subscribe.github.repository.search.streamdata.io
+tag: Subscribe GitHub
 markdown: kramdown
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", ".DS_Store"]
 github_org: streamdata-subscribe
