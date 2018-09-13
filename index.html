@@ -280,13 +280,13 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
     	console.log("url: " + url);
   		console.log("name: " + name);
   		console.log("summary: " + summary);
-    	//console.log("token: " + token);
+    	console.log("token: " + token);
   		//console.log("gitHub_access_token: " + gitHub_access_token);
 
   		userAgent = 'GitHub Topic Subscribe/0.1 by Streamdata.io';
 
       var headers = ['Authorization: token ' + gitHub_access_token,'User-Agent: ' + userAgent];
-
+      console.log(headers);
       eventSource = streamdataio.createEventSource(url, token, headers);
 
       eventSource
