@@ -113,7 +113,7 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   		{
 
   		data = responses[id];
-  		console.log(data);
+  		//console.log(data);
 
   		// replace with regex
   		filename = summary.replace(" ","-");
@@ -144,133 +144,93 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   		tr.appendChild(td);
   		table.appendChild(tr);
 
-  		if(id=='gitHub')
-  			{
+			github_user_name = Cookies.get('github_user_name');
+			github_repo_name = Cookies.get('github_repo_name');
+			github_access_token = Cookies.get('github_access_token');
 
-  			github_user_name = Cookies.get('github_user_name');
-  			github_repo_name = Cookies.get('github_repo_name');
-  			github_access_token = Cookies.get('github_access_token');
+			results = data.data.children;
 
-  			results = data.data.children;
+			json_dump = unescape(encodeURIComponent(JSON.stringify(results)));
 
-  			json_dump = unescape(encodeURIComponent(JSON.stringify(results)));
+			var github = new Github({token: github_access_token,auth: "oauth"});
+      var repo = github.getRepo(github_user_name,github_repo_name);
+			repo.write('master',filename, json_dump, 'Write Initial Data Store', function(err, data) { });
+      repo.getTree('master?recursive=true', function(err, tree) {
+				if(tree)
+					{
+	        $.each(tree, function(treeKey, treeValue) {
+	          path = treeValue['path'];
+	          sha = treeValue['sha'];
+						//console.log(path + ' == ' + writepath);
+	          if(path==filename)
+	            {
+	            repo.writemanual('master',filename, json_dump, 'Updating Data Store', sha, function(err) { });
+	            }
+						});
+					}
+				else
+					{
+					repo.write('master',filename, json_dump, 'Save', function(err) { });
+					}
+			});
 
-  			var github = new Github({token: github_access_token,auth: "oauth"});
-        var repo = github.getRepo(github_user_name,github_repo_name);
-  			repo.write('master',filename, json_dump, 'Write Initial Data Store', function(err, data) { });
-        repo.getTree('master?recursive=true', function(err, tree) {
-  				if(tree)
-  					{
-  	        $.each(tree, function(treeKey, treeValue) {
-  	          path = treeValue['path'];
-  	          sha = treeValue['sha'];
-  						//console.log(path + ' == ' + writepath);
-  	          if(path==filename)
-  	            {
-  	            repo.writemanual('master',filename, json_dump, 'Updating Data Store', sha, function(err) { });
-  	            }
-  						});
-  					}
-  				else
-  					{
-  					repo.write('master',filename, json_dump, 'Save', function(err) { });
-  					}
-  			});
+			total_count = results.length;
+			item_count = 0;
+			results.forEach(function(entry) {
 
-  			total_count = results.length;
-  			item_count = 0;
-  			results.forEach(function(entry) {
+				//console.log(entry);
 
-  				//console.log(entry);
+				var tr = document.createElement("tr");
+				var td = document.createElement("td");
+				var text = document.createTextNode(entry.data.title + ' (score: ' + entry.data.score + ')');
+				a = document.createElement("a");
+				a.setAttribute("href",entry.data.url);
+				a.setAttribute("style",'color:#000; text-decoration: none;');
+				a.appendChild(text);
+				td.appendChild(a);
+				tr.appendChild(td);
+				table.appendChild(tr);
+				item_count++;
 
-  				var tr = document.createElement("tr");
-  				var td = document.createElement("td");
-  				var text = document.createTextNode(entry.data.title + ' (score: ' + entry.data.score + ')');
-  				a = document.createElement("a");
-  				a.setAttribute("href",entry.data.url);
-  				a.setAttribute("style",'color:#000; text-decoration: none;');
-  				a.appendChild(text);
-  				td.appendChild(a);
-  				tr.appendChild(td);
-  				table.appendChild(tr);
-  				item_count++;
+				if(item_count == total_count)
+					{
+						var center = document.createElement("center");
+						center.appendChild(table);
+						document.getElementById("wrapper-"+id).appendChild(center);
 
-  				if(item_count == total_count)
-  					{
-  						var center = document.createElement("center");
-  						center.appendChild(table);
-  						document.getElementById("wrapper-"+id).appendChild(center);
+						if(github_access_token)
+							{
+							github_user_name = Cookies.get('github_user_name');
+							github_repo_name = Cookies.get('github_repo_name');
 
-  						if(github_access_token)
-  							{
-  							github_user_name = Cookies.get('github_user_name');
-  							github_repo_name = Cookies.get('github_repo_name');
+							github_url = 'http://github.com/' + github_user_name + '/' + github_repo_name;
 
-  							github_url = 'http://github.com/' + github_user_name + '/' + github_repo_name;
+							// append a title
+							var tr = document.createElement("tr");
+							var td = document.createElement("td");
+							td.setAttribute("align","center");
+							var hr = document.createElement("hr");
+							var strong = document.createElement("strong");
+							var text_string = 'Data Has Been Saved To GitHub!';
+							var text = document.createTextNode(text_string);
+							td.appendChild(hr);
 
-  							// append a title
-  							var tr = document.createElement("tr");
-  							var td = document.createElement("td");
-  							td.setAttribute("align","center");
-  							var hr = document.createElement("hr");
-  							var strong = document.createElement("strong");
-  							var text_string = 'Data Has Been Saved To GitHub!';
-  							var text = document.createTextNode(text_string);
-  							td.appendChild(hr);
+							a = document.createElement("a");
+							a.setAttribute("href",github_url);
+							a.setAttribute("style",'color:#000; text-decoration: underline;');
+							a.setAttribute("target",'_blank');
+							a.appendChild(text);
 
-  							a = document.createElement("a");
-  							a.setAttribute("href",github_url);
-  							a.setAttribute("style",'color:#000; text-decoration: underline;');
-  							a.setAttribute("target",'_blank');
-  							a.appendChild(text);
+							strong.appendChild(a);
 
-  							strong.appendChild(a);
+							td.appendChild(strong);
+							td.appendChild(a);
+							tr.appendChild(td);
+							table.appendChild(tr);
+							}
+					}
 
-  							td.appendChild(strong);
-  							td.appendChild(a);
-  							tr.appendChild(td);
-  							table.appendChild(tr);
-  							}
-  					}
-
-  				});
-
-  			}
-
-  		if(id=='stack-exchange')
-  			{
-
-  			results = data.items;
-  			total_count = results.length;
-  			//console.log(total_count);
-  			item_count = 0;
-  			results.forEach(function(entry) {
-
-  				//console.log(entry);
-
-  				var tr = document.createElement("tr");
-  				var td = document.createElement("td");
-  				var text = document.createTextNode(entry.data.title + ' (views: ' + entry.data.view_count + ')');
-  				a = document.createElement("a");
-  				a.setAttribute("href",entry.data.url);
-  				a.setAttribute("style",'color:#000; text-decoration: none;');
-  				a.appendChild(text);
-  				td.appendChild(a);
-  				tr.appendChild(td);
-  				table.appendChild(tr);
-
-  				item_count++;
-
-  				if(item_count == total_count)
-  					{
-  					var center = document.createElement("center");
-  					center.appendChild(table);
-  					document.getElementById("wrapper-"+id).appendChild(center);
-  					}
-
-  				});
-
-  			}
+				});
 
   		}
 
@@ -412,7 +372,7 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
               <td width="10%"><a href="#" onclick="build('http://{{ site.url }}/{{ tag_slug }}/{{ api_slug }}/{{ api_path_slug }}/','{{ api_slug }}','{{ api_name }}','{{ api_path_summary }}'); return false;">Subscribe</a></td>
            </tr>
            <tr>
-             <td id="{{ api_slug }}" colspan="4"></td>
+             <td id="wrapper-{{ api_slug }}" colspan="4"></td>
            </tr>
 
            {% assign last_name = api_name %}
