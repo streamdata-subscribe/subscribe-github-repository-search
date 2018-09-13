@@ -144,6 +144,7 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   		tr.appendChild(td);
   		table.appendChild(tr);
 
+      console.log(id);
   		if(id=='gitHub')
   			{
 
@@ -151,6 +152,8 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   			github_repo_name = Cookies.get('github_repo_name');
 
   			results = data.items;
+
+        console.log(results);
 
   			json_dump = unescape(encodeURIComponent(JSON.stringify(results)));
 
@@ -178,6 +181,9 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
 
   			total_count = results.length;
   			item_count = 0;
+
+        console.log("length: " + results.length);
+
   			results.forEach(function(entry) {
 
   				console.log(entry);
