@@ -22,22 +22,10 @@ paths:
       operationId: searchRepositories
       x-api-path-slug: searchrepositories-get
       parameters:
-      - in: header
-        name: Accept
-        description: Is used to set specified media type
-      - in: query
-        name: access_token
-        description: Your Github OAuth token
-      - in: query
-        name: order
-        description: The sort field
       - in: query
         name: q
         description: The search terms
         default: React
-      - in: query
-        name: sort
-        description: If not provided, results are sorted by best match
       responses:
         200:
           description: OK
