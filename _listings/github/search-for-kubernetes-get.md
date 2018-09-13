@@ -17,8 +17,8 @@ consumes:
 paths:
   /search/repositories:
     get:
-      summary: Search for Kafka
-      description: Searches for Kafka across repositories.
+      summary: Search for Kubernetes
+      description: Searches for Kubernetes across repositories.
       operationId: searchRepositories
       x-api-path-slug: searchrepositories-get
       parameters:
