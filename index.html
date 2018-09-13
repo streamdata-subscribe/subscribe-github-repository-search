@@ -362,8 +362,9 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
     {% for listing in listing_object %}
       title: {{ listing.info.title }}<br />
       {% if listing.swagger %}
+        1<br />
         {% if listing.swagger == "2.0" %}
-
+        2<br />
           {% assign api_name = "" %}
           {% assign api_description = "" %}
           {% assign api_image = "" %}
