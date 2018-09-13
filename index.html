@@ -28,15 +28,15 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   	var eventSource = null;
   	var responses = [];
 
-  	var gitHub_access_token = getUrlVar('gitHub_access_token');
-  	if(gitHub_access_token!='')
+  	var github_access_token = getUrlVar('github_access_token');
+  	if(github_access_token!='')
   		{
   		// Setting a cookie value
-  		Cookies.set('gitHub_access_token', gitHub_access_token);
+  		Cookies.set('github_access_token', github_access_token);
   		}
   	else
   		{
-  		gitHub_access_token = Cookies.get('gitHub_access_token');
+  		github_access_token = Cookies.get('github_access_token');
   		}
 
   	var github_access_token = getUrlVar('github_access_token');
@@ -50,7 +50,7 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
 
         var github = new Github({token: github_access_token,auth: "oauth"});
 
-  			github_repo_name = "gitHub-store";
+  			github_repo_name = "github-store";
 
   			var user = github.getUser();
 
@@ -68,7 +68,7 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
 
   			var github = new Github({token: github_access_token,auth: "oauth"});
 
-  			github_repo_name = "gitHub-store";
+  			github_repo_name = "github-store";
 
   			var user = github.getUser();
 
@@ -243,11 +243,11 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   		console.log("name: " + name);
   		console.log("summary: " + summary);
     	console.log("token: " + token);
-  		//console.log("gitHub_access_token: " + gitHub_access_token);
+  		//console.log("github_access_token: " + github_access_token);
 
   		userAgent = 'GitHub Topic Subscribe/0.1 by Streamdata.io';
 
-      var headers = ['Authorization: token ' + gitHub_access_token,'User-Agent: ' + userAgent];
+      var headers = ['Authorization: token ' + github_access_token,'User-Agent: ' + userAgent];
       console.log(headers);
       eventSource = streamdataio.createEventSource(url, token, headers);
 
@@ -290,7 +290,7 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   	base = 'http://streamdata.subscribe.engine.laneworks.net/generate/stream/';
 
   	//openapi
-  	//openapi = 'http://subscribe.streamdata.gallery/subscribe/gitHub/search-istio-get/';
+  	//openapi = 'http://subscribe.streamdata.gallery/subscribe/github/search-istio-get/';
 
   	pull = base + '?openapi_url=' + openapi + '&id=' + id + '&org={{ site.github_org }}&repo={{ site.github_repo }}';
     //console.log(pull);
@@ -391,7 +391,7 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   <table width="55%" style="padding: 25px;">
     <tr>
       <td align="left">
-        <p><a href="https://github.com/streamdata-subscribe/subscribe-gitHub">This project is open source and available on Github</a>. If you have any questions, or come across that doesn't work, or have any ideas about features that we should add, <a href="https://github.com/streamdata-subscribe/subscribe-gitHub/issues">submit an issue on Github</a>. We are working to add other features in the near future so make sure and return often or contact us about how we can help.</p><br />
+        <p><a href="https://github.com/streamdata-subscribe/subscribe-github">This project is open source and available on Github</a>. If you have any questions, or come across that doesn't work, or have any ideas about features that we should add, <a href="https://github.com/streamdata-subscribe/subscribe-github/issues">submit an issue on Github</a>. We are working to add other features in the near future so make sure and return often or contact us about how we can help.</p><br />
         <p>
           <strong>
             * Requires repo level OAuth access to be able to search the GitHub API, and create GitHub repos and write JSON files to the repo.
