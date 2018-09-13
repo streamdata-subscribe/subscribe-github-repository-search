@@ -144,22 +144,22 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   		tr.appendChild(td);
   		table.appendChild(tr);
 
-      console.log('id: ' + id);
+      //console.log('id: ' + id);
   		if(id=='github')
   			{
 
-        console.log(data);
+        //console.log(data);
 
   			github_user_name = Cookies.get('github_user_name');
   			github_repo_name = Cookies.get('github_repo_name');
 
-        console.log("right before!");
+        //console.log("right before!");
         //results_object = JSON.parse(data);
-        console.log("total_count: " + data.total_count);
+        //console.log("total_count: " + data.total_count);
 
   			results = data.items;
 
-        console.log("items: " + results);
+        //console.log("items: " + results);
 
   			json_dump = unescape(encodeURIComponent(JSON.stringify(results)));
 
