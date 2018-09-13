@@ -360,6 +360,7 @@ title: Streamdata.io API Gallery - GitHub Topic Subscribe
   <table width="50%" style="background-color:#FFF; padding: 25px; border: 1px solid #000;">
     {% assign last_name = '' %}
     {% for listing in listing_object %}
+      title: {{ listing.info.title }}<br />
       {% if listing.swagger %}
         {% if listing.swagger == "2.0" %}
 
